@@ -254,24 +254,25 @@ window.onload = async function getIndexDetail_API(){
     nav_category_box.forEach(category => {
         nav_category.innerHTML += `<div onclick="location.href='${frontEndBaseUrl}/articles/category.html?id=${category.category}'" class="category"><a style="color: #cacaca; text-decoration: none;">${category.category} <b style="font-weight: normal; color: #cacaca;">(${category.count})</b></a></div>`
     });
-}
+    }
 
 // 게시글 삭제
-async function deleteFeed() {
+    async function deleteFeed() {
 
-    feed_id =location.search.replace("?id=","")
-    const response = await fetch(`${backEndBaseUrl}/articles/${feed_id}/`, {
-        headers: {
-        Authorization: "Bearer " + localStorage.getItem("access"),
-        },
-        method: "DELETE",
-    });
+        feed_id =location.search.replace("?id=","")
+        const response = await fetch(`${backEndBaseUrl}/articles/${feed_id}/`, {
+            headers: {
+            Authorization: "Bearer " + localStorage.getItem("access"),
+            },
+            method: "DELETE",
+        });
 
-    if (response.status == 204) {
-        alert("게시글삭제완료!")
+        if(response.status == 204){
+            alert("게시글삭제완료!")
             window.location.replace(`${frontEndBaseUrl}/`); // 삭제가 되고나면 인덱스로 다시 이동하게함
-    } else {
-        alert(response.status);
+        }
+        else {
+            alert(response.status);
+        }
     }
-}
 
